@@ -13,7 +13,7 @@ class App extends Component {
           id: new Date(),
           type: "text",
           title: "Questin 1",
-          content: []
+          content: {}
         }
       ]
     };
@@ -24,7 +24,9 @@ class App extends Component {
       id: new Date(),
       type,
       title: "Questin " + this.getFormBlocksSize(),
-      content: []
+      content: {
+        optionType: type === "single" ? "radio" : "checkbox"
+      }
     };
     this.setState({ formBlocks: [...this.state.formBlocks, newFormBlock] });
   };

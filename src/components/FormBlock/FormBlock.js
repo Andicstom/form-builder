@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import FormBlockOptionItem from "../FormBlockOptionItem/FormBlockOptionItem";
 
 const containerStyle = {
   width: "30rem"
@@ -26,7 +27,7 @@ class FormBlock extends Component {
         return (
           <div className="card container" style={containerStyle}>
             <div className="card-body">
-              <div class="input-group mb-3">
+              <div className="input-group mb-3">
                 <div className="input-group-prepend">
                   <span
                     className="input-group-text"
@@ -61,23 +62,27 @@ class FormBlock extends Component {
         return (
           <div className="card container" style={containerStyle}>
             <div className="card-body">
-              <input
-                type="text"
-                id="title"
-                placeholder=""
-                className="form-control"
-                value={this.state.title}
-                onChange={this.onTitleChange}
-              />
+              <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                  <span
+                    className="input-group-text"
+                    id="inputGroup-sizing-default"
+                  >
+                    Question
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default"
+                  id="title"
+                  placeholder={this.state.title}
+                  onChange={this.onTitleChange}
+                />
+              </div>
               <br />
-              <input
-                type="text"
-                id="answer"
-                disabled
-                placeholder=""
-                className="form-control"
-                value="answer"
-              />
+              <FormBlockOptionItem content={this.state.content} />
             </div>
           </div>
         );
