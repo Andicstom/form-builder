@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "./components/Header/Header";
 import AddFormItem from "./components/AddFormItem/AddFormItem";
 import FormBlockContainer from "./components/FormBlockContainer/FormBlockContainer";
+import _ from "lodash";
 
 class App extends Component {
   constructor(props) {
@@ -10,25 +11,68 @@ class App extends Component {
     this.state = {
       formBlocks: [
         {
-          id: new Date(),
+          id: 0,
           type: "text",
           title: "Questin 1",
-          content: {}
+          content: {
+            optionType: "none",
+            formBlockOptionItems: []
+          }
         }
-      ]
+      ],
+      nextId: 1
     };
   }
 
   addFormBlock = type => {
     const newFormBlock = {
-      id: new Date(),
+      id: this.state.nextId,
       type,
       title: "Questin " + this.getFormBlocksSize(),
       content: {
-        optionType: type === "single" ? "radio" : "checkbox"
+        optionType: type === "single" ? "radio" : "checkbox",
+        formBlockOptionItems: []
       }
     };
     this.setState({ formBlocks: [...this.state.formBlocks, newFormBlock] });
+  };
+
+  addFormBlockOption = formBlockId => {
+    const formBlocks = _.cloneDeep(this.state.formBlocks);
+
+    const newFormBlockOption = {
+      id: "0",
+      content: "option"
+    };
+
+    for (let formBlock of formBlocks) {
+      if (formBlock.id === formBlockId) {
+        formBlock.content.formBlockOptionItems = [
+          ...formBlock.content.formBlockOptionItems,
+          newFormBlockOption
+        ];
+        break;
+      }
+    }
+
+    this.setState({ formBlocks });
+  };
+
+  deleteOption = (parentId, optionId) => {
+    const formBlocks = _.cloneDeep(this.state.formBlocks);
+
+    for (let formBlock of formBlocks) {
+      if (formBlock.id === parentId) {
+        let options = formBlock.content.formBlockOptionItems.filter(
+          (option, index) => option.id !== optionId
+        );
+        formBlock.content.formBlockOptionItems = options;
+        console.log(formBlock.content.formBlockOptionItems);
+        break;
+      }
+    }
+    console.log(formBlocks);
+    this.setState({ formBlocks });
   };
 
   getFormBlocksSize = () => {
@@ -41,7 +85,11 @@ class App extends Component {
         <Header />
         <br />
         <div className="container">
-          <FormBlockContainer formBlocks={this.state.formBlocks} />
+          <FormBlockContainer
+            formBlocks={this.state.formBlocks}
+            addFormBlockOption={this.addFormBlockOption}
+            deleteOption={this.deleteOption}
+          />
           <AddFormItem addFormBlock={this.addFormBlock} />
         </div>
       </div>

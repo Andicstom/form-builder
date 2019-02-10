@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import FormBlockOptionItem from "../FormBlockOptionItem/FormBlockOptionItem";
+import AddFormBlockOptionItem from "../AddFormBlockOptionItem/AddFormBlockOptionItem";
 
 const containerStyle = {
-  width: "30rem"
+  width: "60rem"
 };
 
 class FormBlock extends Component {
@@ -82,7 +83,22 @@ class FormBlock extends Component {
                 />
               </div>
               <br />
-              <FormBlockOptionItem content={this.state.content} />
+              <ul>
+                {this.props.formBlock.content.formBlockOptionItems.map(
+                  formBlockOptionItem => (
+                    <FormBlockOptionItem
+                      key={formBlockOptionItem.id}
+                      formBlockOptionItem={formBlockOptionItem}
+                      deleteOption={this.props.deleteOption}
+                      parentId={this.props.formBlock.id}
+                    />
+                  )
+                )}
+              </ul>
+              <AddFormBlockOptionItem
+                addFormBlockOption={this.props.addFormBlockOption}
+                parentId={this.props.formBlock.id}
+              />
             </div>
           </div>
         );
