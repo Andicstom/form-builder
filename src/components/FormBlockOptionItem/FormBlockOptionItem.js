@@ -28,6 +28,7 @@ class FormBlockOptionItem extends Component {
             className="form-control"
             aria-label="Small"
             aria-describedby="inputGroup-sizing-sm"
+            placeholder={this.props.formBlockOptionItem.content}
             onChange={this.changeFormBlockOptionContent}
           />
           <CrudBar

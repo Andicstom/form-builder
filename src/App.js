@@ -3,6 +3,7 @@ import Header from "./components/Header/Header";
 import AddFormItem from "./components/AddFormItem/AddFormItem";
 import FormBlockContainer from "./components/FormBlockContainer/FormBlockContainer";
 import _ from "lodash";
+import uuid from "uuid";
 
 class App extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class App extends Component {
     this.state = {
       formBlocks: [
         {
-          id: 0,
+          id: uuid.v4(),
           type: "text",
           title: "Questin 1",
           content: {
@@ -41,7 +42,7 @@ class App extends Component {
     const formBlocks = _.cloneDeep(this.state.formBlocks);
 
     const newFormBlockOption = {
-      id: "0",
+      id: uuid.v4(),
       content: "option"
     };
 
@@ -67,11 +68,9 @@ class App extends Component {
           (option, index) => option.id !== optionId
         );
         formBlock.content.formBlockOptionItems = options;
-        console.log(formBlock.content.formBlockOptionItems);
         break;
       }
     }
-    console.log(formBlocks);
     this.setState({ formBlocks });
   };
 
