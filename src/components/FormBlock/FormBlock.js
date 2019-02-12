@@ -85,12 +85,69 @@ class FormBlock extends Component {
               <br />
               <ul>
                 {this.props.formBlock.content.formBlockOptionItems.map(
-                  formBlockOptionItem => (
+                  (formBlockOptionItem, index) => (
                     <FormBlockOptionItem
                       key={formBlockOptionItem.id}
                       formBlockOptionItem={formBlockOptionItem}
                       deleteOption={this.props.deleteOption}
                       parentId={this.props.formBlock.id}
+                      moveOptionUp={this.props.moveOptionUp}
+                      moveOptionDown={this.props.moveOptionDown}
+                      index={index}
+                      optionsSize={
+                        this.props.formBlock.content.formBlockOptionItems.length
+                      }
+                      type={this.props.formBlock.content.optionType}
+                    />
+                  )
+                )}
+              </ul>
+              <AddFormBlockOptionItem
+                addFormBlockOption={this.props.addFormBlockOption}
+                parentId={this.props.formBlock.id}
+              />
+            </div>
+          </div>
+        );
+      case "multi":
+        return (
+          <div className="card container" style={containerStyle}>
+            <div className="card-body">
+              <div className="input-group mb-3">
+                <div className="input-group-prepend">
+                  <span
+                    className="input-group-text"
+                    id="inputGroup-sizing-default"
+                  >
+                    Question
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default"
+                  id="title"
+                  placeholder={this.state.title}
+                  onChange={this.onTitleChange}
+                />
+              </div>
+              <br />
+              <ul>
+                {this.props.formBlock.content.formBlockOptionItems.map(
+                  (formBlockOptionItem, index) => (
+                    <FormBlockOptionItem
+                      key={formBlockOptionItem.id}
+                      formBlockOptionItem={formBlockOptionItem}
+                      deleteOption={this.props.deleteOption}
+                      parentId={this.props.formBlock.id}
+                      moveOptionUp={this.props.moveOptionUp}
+                      moveOptionDown={this.props.moveOptionDown}
+                      index={index}
+                      optionsSize={
+                        this.props.formBlock.content.formBlockOptionItems.length
+                      }
+                      type={this.props.formBlock.content.optionType}
                     />
                   )
                 )}

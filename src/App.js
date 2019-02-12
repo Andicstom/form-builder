@@ -20,18 +20,17 @@ class App extends Component {
             formBlockOptionItems: []
           }
         }
-      ],
-      nextId: 1
+      ]
     };
   }
 
   addFormBlock = type => {
     const newFormBlock = {
-      id: this.state.nextId,
+      id: uuid.v4(),
       type,
       title: "Questin " + this.getFormBlocksSize(),
       content: {
-        optionType: type === "single" ? "radio" : "checkbox",
+        optionType: type,
         formBlockOptionItems: []
       }
     };
@@ -74,6 +73,40 @@ class App extends Component {
     this.setState({ formBlocks });
   };
 
+  moveOptionUp = (parentId, optionIndex) => {
+    const formBlocks = _.cloneDeep(this.state.formBlocks);
+
+    for (let formBlock of formBlocks) {
+      if (formBlock.id === parentId) {
+        let options = formBlock.content.formBlockOptionItems;
+
+        let temp = options[optionIndex -1];
+        options[optionIndex - 1] = options[optionIndex];
+        options[optionIndex] = temp;
+        formBlock.content.formBlockOptionItems = options;
+        break;
+      }
+    }
+    this.setState({ formBlocks });
+  };
+
+  moveOptionDown = (parentId, optionIndex) => {
+    const formBlocks = _.cloneDeep(this.state.formBlocks);
+
+    for (let formBlock of formBlocks) {
+      if (formBlock.id === parentId) {
+        let options = formBlock.content.formBlockOptionItems;
+
+        let temp = options[optionIndex + 1];
+        options[optionIndex + 1] = options[optionIndex];
+        options[optionIndex] = temp;
+        formBlock.content.formBlockOptionItems = options;
+        break;
+      }
+    }
+    this.setState({ formBlocks });
+  };
+
   getFormBlocksSize = () => {
     return this.state.formBlocks.length + 1;
   };
@@ -88,6 +121,8 @@ class App extends Component {
             formBlocks={this.state.formBlocks}
             addFormBlockOption={this.addFormBlockOption}
             deleteOption={this.deleteOption}
+            moveOptionUp={this.moveOptionUp}
+            moveOptionDown={this.moveOptionDown}
           />
           <AddFormItem addFormBlock={this.addFormBlock} />
         </div>

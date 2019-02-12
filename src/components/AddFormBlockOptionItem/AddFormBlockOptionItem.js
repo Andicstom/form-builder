@@ -7,7 +7,7 @@ function AddFormBlockOptionItem(props) {
       className="btn btn-primary"
       onClick={() => props.addFormBlockOption(props.parentId)}
     >
-      <i class="fas fa-plus" /> option
+      <i className="fas fa-plus" /> option
     </button>
   );
 }
