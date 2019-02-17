@@ -16,7 +16,6 @@ class App extends Component {
           type: "text",
           title: "Questin 1",
           content: {
-            optionType: "none",
             formBlockOptionItems: []
           }
         }
@@ -30,7 +29,6 @@ class App extends Component {
       type,
       title: "Questin " + this.getFormBlocksSize(),
       content: {
-        optionType: type,
         formBlockOptionItems: []
       }
     };
