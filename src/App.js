@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Header from "./components/Header/Header";
+import Header from "./components/Navbar/Navbar";
 import AddFormItem from "./components/AddFormItem/AddFormItem";
 import FormBlockContainer from "./components/FormBlockContainer/FormBlockContainer";
 import _ from "lodash";
