@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 class AddFormItem extends Component {
     render() {
         return (
-            <div className="dropdown">
+            <div className="dropdown float-right">
                 <button
-                    className="btn btn-secondary dropdown-toggle"
+                    className="btn btn-primary dropdown-toggle"
                     type="button"
                     id="dropdownMenu2"
                     data-toggle="dropdown"

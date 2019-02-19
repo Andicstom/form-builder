@@ -15,7 +15,10 @@ class FormBlock extends Component {
 
     render() {
         return (
-            <div className="card container">
+            <div className="card">
+                <div className="card-header p-0 text-right">
+                    {this.props.crudBar}
+                </div>
                 <div className="card-body">
                     <div className="input-group mb-3">
                         <div className="input-group-prepend">

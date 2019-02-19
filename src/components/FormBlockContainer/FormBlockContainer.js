@@ -9,7 +9,7 @@ class FormBlockContainer extends Component {
     renderFormBlocks = () => {
         let formBlocks = this.props.formBlocks;
 
-        let formBlocksUI = formBlocks.map(formBlock => {
+        let formBlocksUI = formBlocks.map((formBlock, formBlockIndex) => {
             let key = formBlock.id;
             let type = formBlock.type;
             let options = formBlock.content.formBlockOptionItems;
@@ -27,14 +27,12 @@ class FormBlockContainer extends Component {
                                 crudBar={
                                     <CrudBar
                                         parentId={formBlock.id}
-                                        optionId={option.id}
+                                        id={option.id}
                                         index={index}
-                                        optionsSize={options.length}
-                                        deleteOption={this.props.deleteOption}
-                                        moveOptionUp={this.props.moveOptionUp}
-                                        moveOptionDown={
-                                            this.props.moveOptionDown
-                                        }
+                                        listSize={options.length}
+                                        deleteItem={this.props.deleteOption}
+                                        moveItemUp={this.props.moveOptionUp}
+                                        moveItemDown={this.props.moveOptionDown}
                                     />
                                 }
                             />
@@ -51,6 +49,16 @@ class FormBlockContainer extends Component {
                     key={key}
                     title={formBlock.title}
                     content={content}
+                    crudBar={
+                        <CrudBar
+                            id={key}
+                            index={formBlockIndex}
+                            listSize={formBlocks.length}
+                            deleteItem={this.props.deleteFormBlock}
+                            moveItemUp={this.props.moveFormBlockUp}
+                            moveItemDown={this.props.moveFormBlockDown}
+                        />
+                    }
                 />
             );
         });

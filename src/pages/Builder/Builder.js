@@ -21,6 +21,9 @@ class Builder extends Component {
                     deleteOption={this.props.deleteOption}
                     moveOptionUp={this.props.moveOptionUp}
                     moveOptionDown={this.props.moveOptionDown}
+                    deleteFormBlock={this.props.deleteFormBlock}
+                    moveFormBlockUp={this.props.moveFormBlockUp}
+                    moveFormBlockDown={this.props.moveFormBlockDown}
                 />
                 <AddFormItem addFormBlock={this.props.addFormBlock} />
             </div>

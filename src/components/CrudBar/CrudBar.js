@@ -6,7 +6,7 @@ function CrudBar(props) {
             <button
                 type="button"
                 className="btn btn-secondary"
-                onClick={() => props.moveOptionUp(props.parentId, props.index)}
+                onClick={() => props.moveItemUp(props.id)}
                 disabled={props.index === 0}
             >
                 <i className="fas fa-angle-up" />
@@ -15,9 +15,9 @@ function CrudBar(props) {
                 type="button"
                 className="btn btn-secondary"
                 onClick={() =>
-                    props.moveOptionDown(props.parentId, props.index)
+                    props.moveItemDown(props.id)
                 }
-                disabled={props.index === props.optionsSize - 1}
+                disabled={props.index === props.listSize - 1}
             >
                 <i className="fas fa-angle-down" />
             </button>
@@ -25,7 +25,7 @@ function CrudBar(props) {
                 type="button"
                 className="btn btn-secondary"
                 onClick={() =>
-                    props.deleteOption(props.parentId, props.optionId)
+                    props.deleteItem(props.id)
                 }
             >
                 <i className="fas fa-times" />

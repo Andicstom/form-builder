@@ -42,7 +42,7 @@ class FormBlockOptionItem extends Component {
                     placeholder={this.state.content}
                     onChange={this.changeFormBlockOptionContent}
                 />
-                {this.props.crudBar}
+                <div className="float-right">{this.props.crudBar}</div>
             </div>
         );
     }

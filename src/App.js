@@ -37,6 +37,44 @@ class App extends Component {
         this.setState({ formBlocks: [...this.state.formBlocks, newFormBlock] });
     };
 
+    deleteFormBlock = id => {
+        this.setState({
+            formBlocks: this.state.formBlocks.filter(
+                formBlock => formBlock.id !== id
+            )
+        });
+    };
+
+    moveFormBlockUp = id => {
+        let formBlocks = _.cloneDeep(this.state.formBlocks);
+
+        for (let [index, formBlock] of formBlocks.entries()) {
+            if (formBlock.id === id) {
+                let temp = formBlocks[index - 1];
+                formBlocks[index - 1] = formBlocks[index];
+                formBlocks[index] = temp;
+                break;
+            }
+        }
+
+        this.setState({ formBlocks });
+    };
+
+    moveFormBlockDown = id => {
+        let formBlocks = _.cloneDeep(this.state.formBlocks);
+
+        for (let [index, formBlock] of formBlocks.entries()) {
+            if (formBlock.id === id) {
+                let temp = formBlocks[index + 1];
+                formBlocks[index + 1] = formBlocks[index];
+                formBlocks[index] = temp;
+                break;
+            }
+        }
+
+        this.setState({ formBlocks });
+    };
+
     addFormBlockOption = formBlockId => {
         const formBlocks = _.cloneDeep(this.state.formBlocks);
 
@@ -58,58 +96,64 @@ class App extends Component {
         this.setState({ formBlocks });
     };
 
-    deleteOption = (parentId, optionId) => {
+    deleteOption = optionId => {
         const formBlocks = _.cloneDeep(this.state.formBlocks);
 
         for (let formBlock of formBlocks) {
-            if (formBlock.id === parentId) {
-                let options = formBlock.content.formBlockOptionItems.filter(
-                    (option, index) => option.id !== optionId
-                );
-                formBlock.content.formBlockOptionItems = options;
-                break;
+            let options = formBlock.content.formBlockOptionItems;
+
+            for (let [index, option] of options.entries()) {
+                if (option.id === optionId) {
+                    let newOptions = options.filter(
+                        option => option.id !== optionId
+                    );
+                    formBlock.content.formBlockOptionItems = newOptions;
+                    break;
+                }
             }
         }
         this.setState({ formBlocks });
     };
 
-    moveOptionUp = (parentId, optionIndex) => {
+    moveOptionUp = optionId => {
         const formBlocks = _.cloneDeep(this.state.formBlocks);
 
         for (let formBlock of formBlocks) {
-            if (formBlock.id === parentId) {
-                let options = formBlock.content.formBlockOptionItems;
-
-                let temp = options[optionIndex - 1];
-                options[optionIndex - 1] = options[optionIndex];
-                options[optionIndex] = temp;
-                formBlock.content.formBlockOptionItems = options;
-                break;
+            let options = formBlock.content.formBlockOptionItems;
+            for (let [index, option] of options.entries()) {
+                if (option.id === optionId) {
+                    let temp = options[index - 1];
+                    options[index - 1] = options[index];
+                    options[index] = temp;
+                    formBlock.content.formBlockOptionItems = options;
+                    break;
+                }
             }
         }
         this.setState({ formBlocks });
     };
 
-    moveOptionDown = (parentId, optionIndex) => {
+    moveOptionDown = optionId => {
         const formBlocks = _.cloneDeep(this.state.formBlocks);
 
         for (let formBlock of formBlocks) {
-            if (formBlock.id === parentId) {
-                let options = formBlock.content.formBlockOptionItems;
-
-                let temp = options[optionIndex + 1];
-                options[optionIndex + 1] = options[optionIndex];
-                options[optionIndex] = temp;
-                formBlock.content.formBlockOptionItems = options;
-                break;
+            let options = formBlock.content.formBlockOptionItems;
+            for (let [index, option] of options.entries()) {
+                if (option.id === optionId) {
+                    let temp = options[index + 1];
+                    options[index + 1] = options[index];
+                    options[index] = temp;
+                    formBlock.content.formBlockOptionItems = options;
+                    break;
+                }
             }
         }
         this.setState({ formBlocks });
     };
 
-    formOnsubmit = (e) => {
+    formOnsubmit = e => {
         console.log(e);
-    }
+    };
 
     getFormBlocksSize = () => {
         return this.state.formBlocks.length + 1;
@@ -132,15 +176,21 @@ class App extends Component {
                                 moveOptionUp={this.moveOptionUp}
                                 moveOptionDown={this.moveOptionDown}
                                 addFormBlock={this.addFormBlock}
+                                deleteFormBlock={this.deleteFormBlock}
+                                moveFormBlockUp={this.moveFormBlockUp}
+                                moveFormBlockDown={this.moveFormBlockDown}
                             />
                         )}
                     />
-                    <Route path="/preview" render={() => (
-                        <Preview
-                            formData={this.state.formBlocks}
-                            onSubmit={this.onSubmit}
-                        />
-                    )} />
+                    <Route
+                        path="/preview"
+                        render={() => (
+                            <Preview
+                                formData={this.state.formBlocks}
+                                onSubmit={this.onSubmit}
+                            />
+                        )}
+                    />
                 </div>
             </Router>
         );
