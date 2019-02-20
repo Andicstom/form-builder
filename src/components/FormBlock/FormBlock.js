@@ -10,6 +10,7 @@ class FormBlock extends Component {
     }
 
     onTitleChange = e => {
+        this.props.onFormBlockNameChange(this.props.id, e.target.value);
         this.setState({ title: e.target.value });
     };
 

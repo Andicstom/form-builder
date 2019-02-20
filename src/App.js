@@ -159,6 +159,33 @@ class App extends Component {
         return this.state.formBlocks.length + 1;
     };
 
+    onFormOptionNameChange = (id, content) => {
+        const formBlocks = _.cloneDeep(this.state.formBlocks);
+        for (let formBlock of formBlocks) {
+            let options = formBlock.content.formBlockOptionItems;
+            for (let option of options) {
+                if (option.id === id) {
+                    option.content = content;
+                    formBlock.content.formBlockOptionItems = options;
+                    this.setState({ formBlocks });
+                    return;
+                }
+            }
+        }
+    }
+
+    onFormBlockNameChange = (id, title) => {
+        const formBlocks = _.cloneDeep(this.state.formBlocks);
+        for (let formBlock of formBlocks) {
+            if ( formBlock.id === id) {
+                formBlock.title = title;
+                break;
+            }
+        }
+
+        this.setState({ formBlocks });
+    }
+
     render() {
         return (
             <Router>
@@ -179,6 +206,8 @@ class App extends Component {
                                 deleteFormBlock={this.deleteFormBlock}
                                 moveFormBlockUp={this.moveFormBlockUp}
                                 moveFormBlockDown={this.moveFormBlockDown}
+                                onFormOptionNameChange={this.onFormOptionNameChange}
+                                onFormBlockNameChange={this.onFormBlockNameChange}
                             />
                         )}
                     />

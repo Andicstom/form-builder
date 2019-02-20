@@ -2,10 +2,10 @@ import React from 'react';
 
 function CrudBar(props) {
     return (
-        <div className="btn-group" role="group" aria-label="Basic example">
+        <div className="btn-group" role="group" aria-label="Crud bar">
             <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-primary"
                 onClick={() => props.moveItemUp(props.id)}
                 disabled={props.index === 0}
             >
@@ -13,7 +13,7 @@ function CrudBar(props) {
             </button>
             <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-primary"
                 onClick={() =>
                     props.moveItemDown(props.id)
                 }
@@ -23,7 +23,7 @@ function CrudBar(props) {
             </button>
             <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-primary"
                 onClick={() =>
                     props.deleteItem(props.id)
                 }

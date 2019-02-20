@@ -5,11 +5,12 @@ class FormBlockOptionItem extends Component {
         super(props);
 
         this.state = {
-            content: this.props.index + 1 + '. ' + this.props.option.content
+            content: this.props.option.content
         };
     }
 
     changeFormBlockOptionContent = e => {
+        this.props.onFormOptionNameChange(this.props.option.id, e.target.value);
         this.setState({ content: e.target.value });
     };
 

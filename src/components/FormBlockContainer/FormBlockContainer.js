@@ -35,6 +35,9 @@ class FormBlockContainer extends Component {
                                         moveItemDown={this.props.moveOptionDown}
                                     />
                                 }
+                                onFormOptionNameChange={
+                                    this.props.onFormOptionNameChange
+                                }
                             />
                         ))}
                         <AddFormBlockOptionItem
@@ -47,6 +50,7 @@ class FormBlockContainer extends Component {
             return (
                 <FormBlock
                     key={key}
+                    id={key}
                     title={formBlock.title}
                     content={content}
                     crudBar={
@@ -59,6 +63,7 @@ class FormBlockContainer extends Component {
                             moveItemDown={this.props.moveFormBlockDown}
                         />
                     }
+                    onFormBlockNameChange={this.props.onFormBlockNameChange}
                 />
             );
         });
