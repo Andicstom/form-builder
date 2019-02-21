@@ -15,7 +15,12 @@ class FormBlockContainer extends Component {
             let options = formBlock.content.formBlockOptionItems;
             let content =
                 type === 'text' || type === 'date' ? (
-                    <SimpleInputContent type={type} disabled={true} />
+                    <SimpleInputContent
+                        type={type}
+                        disabled={true}
+                        workAs={'answer'}
+                        name={'answer'}
+                    />
                 ) : (
                     <div>
                         {options.map((option, index) => (
@@ -72,7 +77,33 @@ class FormBlockContainer extends Component {
     };
 
     render() {
-        return <React.Fragment>{this.renderFormBlocks()}</React.Fragment>;
+        return (
+            <div className="card">
+                <div className="card-body">
+                    <h5 className="card-title">
+                        <SimpleInputContent
+                            type={'hideSpan'}
+                            disabled={false}
+                            workAs={'title'}
+                            onSimpleInputChange={this.props.onSimpleInputChange}
+                            name={this.props.title}
+                        />
+                    </h5>
+                    <h6 className="card-subtitle mb-2 text-muted">
+                        <SimpleInputContent
+                            type={'hideSpan'}
+                            disabled={false}
+                            workAs={'description'}
+                            onSimpleInputChange={this.props.onSimpleInputChange}
+                            name={this.props.description}
+                        />
+                    </h6>
+                </div>
+                <ul className="list-group list-group-flush">
+                    {this.renderFormBlocks()}
+                </ul>
+            </div>
+        );
     }
 }
 

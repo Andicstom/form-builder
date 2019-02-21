@@ -26,6 +26,9 @@ class Builder extends Component {
                     moveFormBlockDown={this.props.moveFormBlockDown}
                     onFormOptionNameChange={this.props.onFormOptionNameChange}
                     onFormBlockNameChange={this.props.onFormBlockNameChange}
+                    onSimpleInputChange={this.props.onSimpleInputChange}
+                    title={this.props.title}
+                    description={this.props.description}
                 />
                 <AddFormItem addFormBlock={this.props.addFormBlock} />
             </div>

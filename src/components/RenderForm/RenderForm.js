@@ -26,6 +26,10 @@ class RenderForm extends Component {
         return false;
     };
 
+    isOptionTypeInputElem = type => {
+        return type === 'checkbox' || type === 'date' || type === 'radio';
+    }
+
     renderForm = () => {
         let formData = this.props.formData;
         let formUI = formData.map(formElem => {
@@ -40,7 +44,7 @@ class RenderForm extends Component {
                     </label>
                     {this.isNonInputFormElem(type) ? (
                         this.getNonInputFormElem(formElem)
-                    ) : options.length !== 0 ? (
+                    ) : this.isOptionTypeInputElem(type) ? (
                         options.map((option, index) => (
                             <div className="form-check" key={option.id}>
                                 <input

@@ -12,6 +12,8 @@ class App extends Component {
         super(props);
 
         this.state = {
+            title: 'Add your title',
+            description: 'Add your description',
             formBlocks: [
                 {
                     id: uuid.v4(),
@@ -172,19 +174,25 @@ class App extends Component {
                 }
             }
         }
-    }
+    };
 
     onFormBlockNameChange = (id, title) => {
         const formBlocks = _.cloneDeep(this.state.formBlocks);
         for (let formBlock of formBlocks) {
-            if ( formBlock.id === id) {
+            if (formBlock.id === id) {
                 formBlock.title = title;
                 break;
             }
         }
 
         this.setState({ formBlocks });
-    }
+    };
+
+    onSimpleInputChange = (value, workAs) => {
+        workAs === 'title'
+            ? this.setState({ title: value })
+            : this.setState({ description: value });
+    };
 
     render() {
         return (
@@ -206,8 +214,15 @@ class App extends Component {
                                 deleteFormBlock={this.deleteFormBlock}
                                 moveFormBlockUp={this.moveFormBlockUp}
                                 moveFormBlockDown={this.moveFormBlockDown}
-                                onFormOptionNameChange={this.onFormOptionNameChange}
-                                onFormBlockNameChange={this.onFormBlockNameChange}
+                                onFormOptionNameChange={
+                                    this.onFormOptionNameChange
+                                }
+                                onFormBlockNameChange={
+                                    this.onFormBlockNameChange
+                                }
+                                onSimpleInputChange={this.onSimpleInputChange}
+                                title={this.state.title}
+                                description={this.state.description}
                             />
                         )}
                     />
@@ -217,6 +232,8 @@ class App extends Component {
                             <Preview
                                 formData={this.state.formBlocks}
                                 onSubmit={this.onSubmit}
+                                title={this.state.title}
+                                description={this.state.description}
                             />
                         )}
                     />

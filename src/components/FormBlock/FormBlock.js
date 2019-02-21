@@ -16,8 +16,8 @@ class FormBlock extends Component {
 
     render() {
         return (
-            <div className="card">
-                <div className="card-header p-0 text-right">
+            <li className="list-group-item p-0" >
+                <div className="text-right">
                     {this.props.crudBar}
                 </div>
                 <div className="card-body">
@@ -43,7 +43,7 @@ class FormBlock extends Component {
                     <br />
                     {this.props.content}
                 </div>
-            </div>
+            </li>
         );
     }
 }

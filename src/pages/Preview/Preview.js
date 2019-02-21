@@ -14,6 +14,8 @@ class Preview extends Component {
                 <RenderForm
                     formData={this.props.formData}
                     onSubmit={this.props.onSubmit}
+                    title={this.props.title}
+                    description={this.props.description}
                 />
             </div>
         );
