@@ -3,6 +3,7 @@ import FormBlock from '../FormBlock/FormBlock';
 import FormBlockOptionItem from '../FormBlockOptionItem/FormBlockOptionItem';
 import SimpleInputContent from '../SimpleInpuntContent/SimpleInputContent';
 import AddFormBlockOptionItem from '../AddFormBlockOptionItem/AddFormBlockOptionItem';
+import RangePikcer from '../RangePicker/RangePicker';
 import CrudBar from '../CrudBar/CrudBar';
 
 class FormBlockContainer extends Component {
@@ -13,15 +14,29 @@ class FormBlockContainer extends Component {
             let key = formBlock.id;
             let type = formBlock.type;
             let options = formBlock.content.formBlockOptionItems;
-            let content =
-                type === 'text' || type === 'date' ? (
+            let props = formBlock.content.props;
+            let content;
+            if (type === 'text' || type === 'date') {
+                content = (
                     <SimpleInputContent
                         type={type}
                         disabled={true}
                         workAs={'answer'}
                         name={'answer'}
+                        props={props}
                     />
-                ) : (
+                );
+            } else if (type === 'range') {
+                content = (
+                    <RangePikcer
+                        id={key}
+                        onMinNumberChange={this.props.onMinNumberChange}
+                        onMaxNumberChange={this.props.onMaxNumberChange}
+                        props={props}
+                    />
+                );
+            } else {
+                content = (
                     <div>
                         {options.map((option, index) => (
                             <FormBlockOptionItem
@@ -51,6 +66,7 @@ class FormBlockContainer extends Component {
                         />
                     </div>
                 );
+            }
 
             return (
                 <FormBlock

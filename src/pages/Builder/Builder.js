@@ -29,6 +29,8 @@ class Builder extends Component {
                     onSimpleInputChange={this.props.onSimpleInputChange}
                     title={this.props.title}
                     description={this.props.description}
+                    onMinNumberChange={this.props.onMinNumberChange}
+                    onMaxNumberChange={this.props.onMaxNumberChange}
                 />
                 <AddFormItem addFormBlock={this.props.addFormBlock} />
             </div>

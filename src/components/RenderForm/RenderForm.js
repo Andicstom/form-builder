@@ -36,6 +36,8 @@ class RenderForm extends Component {
             let key = formElem.id;
             let type = formElem.type;
             let options = formElem.content.formBlockOptionItems;
+            let props = formElem.content.props;
+            console.log(props);
 
             return (
                 <div key={key} className="form-group">
@@ -65,6 +67,7 @@ class RenderForm extends Component {
                         ))
                     ) : (
                         <input
+                            {...props}
                             type={type}
                             ref={key => {
                                 this[formElem.key] = key;

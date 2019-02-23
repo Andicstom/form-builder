@@ -60,6 +60,15 @@ class AddFormItem extends Component {
                     >
                         Date
                     </button>
+                    <button
+                        className="dropdown-item"
+                        type="button"
+                        onClick={() => {
+                            this.props.addFormBlock('range');
+                        }}
+                    >
+                        Range
+                    </button>
                 </div>
             </div>
         );

@@ -20,6 +20,7 @@ class App extends Component {
                     type: 'text',
                     title: 'Questin 1',
                     content: {
+                        props: {},
                         formBlockOptionItems: []
                     }
                 }
@@ -33,6 +34,7 @@ class App extends Component {
             type,
             title: 'Questin ' + this.getFormBlocksSize(),
             content: {
+                props: {},
                 formBlockOptionItems: []
             }
         };
@@ -194,6 +196,28 @@ class App extends Component {
             : this.setState({ description: value });
     };
 
+    onMinNumberChange = (formBlockId, minNumber) => {
+        const formBlocks = _.cloneDeep(this.state.formBlocks);
+        for (let formBlock of formBlocks) {
+            if (formBlock.id === formBlockId) {
+                formBlock.content.props.min = minNumber;
+                break;
+            }
+        }
+        this.setState({ formBlocks });
+    };
+
+    onMaxNumberChange = (formBlockId, maxNumber) => {
+        const formBlocks = _.cloneDeep(this.state.formBlocks);
+        for (let formBlock of formBlocks) {
+            if (formBlock.id === formBlockId) {
+                formBlock.content.props.max = maxNumber;
+                break;
+            }
+        }
+        this.setState({ formBlocks });
+    };
+
     render() {
         return (
             <Router>
@@ -223,6 +247,8 @@ class App extends Component {
                                 onSimpleInputChange={this.onSimpleInputChange}
                                 title={this.state.title}
                                 description={this.state.description}
+                                onMinNumberChange={this.onMinNumberChange}
+                                onMaxNumberChange={this.onMaxNumberChange}
                             />
                         )}
                     />
