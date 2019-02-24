@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AddFormItem from '../../components/AddFormItem/AddFormItem';
 import FormBlockContainer from '../../components/FormBlockContainer/FormBlockContainer';
+import SimpleLinkButton from '../../components/SimpleLinkButton/SimpleLinkButton';
 
 class Builder extends Component {
     constructor(props) {
@@ -34,6 +35,11 @@ class Builder extends Component {
                     changeDynamicInputType={this.props.changeDynamicInputType}
                 />
                 <AddFormItem addFormBlock={this.props.addFormBlock} />
+                <SimpleLinkButton
+                    title="Show preview"
+                    className="btn btn-success"
+                    toLink="/preview"
+                />
             </div>
         );
     }
