@@ -31,6 +31,7 @@ class Builder extends Component {
                     description={this.props.description}
                     onMinNumberChange={this.props.onMinNumberChange}
                     onMaxNumberChange={this.props.onMaxNumberChange}
+                    changeDynamicInputType={this.props.changeDynamicInputType}
                 />
                 <AddFormItem addFormBlock={this.props.addFormBlock} />
             </div>

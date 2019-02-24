@@ -69,6 +69,24 @@ class AddFormItem extends Component {
                     >
                         Range
                     </button>
+                    <button
+                        className="dropdown-item"
+                        type="button"
+                        onClick={() => {
+                            this.props.addFormBlock('longText');
+                        }}
+                    >
+                        Long text
+                    </button>
+                    <button
+                        className="dropdown-item"
+                        type="button"
+                        onClick={() => {
+                            this.props.addFormBlock('dynamicInput');
+                        }}
+                    >
+                        Dynamic input
+                    </button>
                 </div>
             </div>
         );

@@ -218,6 +218,17 @@ class App extends Component {
         this.setState({ formBlocks });
     };
 
+    changeDynamicInputType = (formBlockId, type) => {
+        const formBlocks = _.cloneDeep(this.state.formBlocks);
+        for (let formBlock of formBlocks) {
+            if (formBlock.id === formBlockId) {
+                formBlock.type = type;
+                break;
+            }
+        }
+        this.setState({ formBlocks });
+    };
+
     render() {
         return (
             <Router>
@@ -249,6 +260,7 @@ class App extends Component {
                                 description={this.state.description}
                                 onMinNumberChange={this.onMinNumberChange}
                                 onMaxNumberChange={this.onMaxNumberChange}
+                                changeDynamicInputType={this.changeDynamicInputType}
                             />
                         )}
                     />

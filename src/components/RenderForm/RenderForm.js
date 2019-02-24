@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TextArea from '../TextArea/TextArea';
 
 class RenderForm extends Component {
     constructor(props) {
@@ -9,17 +10,28 @@ class RenderForm extends Component {
 
     getNonInputFormElem = formElem => {
         let options = formElem.content.formBlockOptionItems;
-        return (
-            <select className="form-control" id={formElem.id}>
-                {options.map((option, index) => (
-                    <option key={option.id}>{option.content}</option>
-                ))}
-            </select>
-        );
+        switch(formElem.type) {
+            case 'dropdown':
+            return (
+                <select className="form-control" id={formElem.id}>
+                    {options.map((option, index) => (
+                        <option key={option.id}>{option.content}</option>
+                    ))}
+                </select>
+            );
+            case 'longText':
+            return (
+                <TextArea disabled={false} />
+            );
+            default:
+            return(
+                <p>Sorry, we can't render your form elem!</p>
+            );
+        }
     };
 
     isNonInputFormElem = type => {
-        if (type === 'dropdown') {
+        if (type === 'dropdown' || type === 'longText') {
             return true;
         }
 
@@ -27,7 +39,7 @@ class RenderForm extends Component {
     };
 
     isOptionTypeInputElem = type => {
-        return type === 'checkbox' || type === 'date' || type === 'radio';
+        return type === 'checkbox' || type === 'radio';
     }
 
     renderForm = () => {
@@ -37,7 +49,6 @@ class RenderForm extends Component {
             let type = formElem.type;
             let options = formElem.content.formBlockOptionItems;
             let props = formElem.content.props;
-            console.log(props);
 
             return (
                 <div key={key} className="form-group">

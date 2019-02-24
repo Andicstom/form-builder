@@ -5,6 +5,7 @@ import SimpleInputContent from '../SimpleInpuntContent/SimpleInputContent';
 import AddFormBlockOptionItem from '../AddFormBlockOptionItem/AddFormBlockOptionItem';
 import RangePikcer from '../RangePicker/RangePicker';
 import CrudBar from '../CrudBar/CrudBar';
+import TextArea from '../TextArea/TextArea';
 
 class FormBlockContainer extends Component {
     renderFormBlocks = () => {
@@ -16,14 +17,28 @@ class FormBlockContainer extends Component {
             let options = formBlock.content.formBlockOptionItems;
             let props = formBlock.content.props;
             let content;
-            if (type === 'text' || type === 'date') {
+            if (
+                type === 'text' ||
+                type === 'date' ||
+                type === 'dynamicInput' ||
+                type === 'password' ||
+                type === 'email' ||
+                type === 'number' || 
+                type === 'tel' ||
+                type === 'color' ||
+                type === 'time' 
+            ) {
                 content = (
                     <SimpleInputContent
+                        id={key}
                         type={type}
                         disabled={true}
                         workAs={'answer'}
                         name={'answer'}
                         props={props}
+                        changeDynamicInputType={
+                            this.props.changeDynamicInputType
+                        }
                     />
                 );
             } else if (type === 'range') {
@@ -35,6 +50,8 @@ class FormBlockContainer extends Component {
                         props={props}
                     />
                 );
+            } else if (type === 'longText') {
+                content = <TextArea disabled={true} />;
             } else {
                 content = (
                     <div>
