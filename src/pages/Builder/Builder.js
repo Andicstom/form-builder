@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AddFormItem from '../../components/AddFormItem/AddFormItem';
 import FormBlockContainer from '../../components/FormBlockContainer/FormBlockContainer';
 import SimpleLinkButton from '../../components/SimpleLinkButton/SimpleLinkButton';
+import SimpleButton from '../../components/SimpleButton/SimpleButton';
 
 class Builder extends Component {
     constructor(props) {
@@ -34,12 +35,30 @@ class Builder extends Component {
                     onMaxNumberChange={this.props.onMaxNumberChange}
                     changeDynamicInputType={this.props.changeDynamicInputType}
                 />
-                <AddFormItem addFormBlock={this.props.addFormBlock} />
-                <SimpleLinkButton
-                    title="Show preview"
-                    className="btn btn-success"
-                    toLink="/preview"
-                />
+
+                <div className="container text-center p-0">
+                    <div className="row">
+                        <div className="col-sm">
+                            <SimpleLinkButton
+                                title="Show preview"
+                                className="btn btn-success float-left"
+                                toLink="/preview"
+                            />
+                        </div>
+                        <div className="col-sm">
+                            <SimpleButton
+                                title="Reset form"
+                                className="btn btn-danger"
+                                onClick={this.props.resetFormData}
+                            />
+                        </div>
+                        <div className="col-sm">
+                            <AddFormItem
+                                addFormBlock={this.props.addFormBlock}
+                            />
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

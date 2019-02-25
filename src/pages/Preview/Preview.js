@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import RenderForm from '../../components/RenderForm/RenderForm';
+import SimpleLinkButton from '../../components/SimpleLinkButton/SimpleLinkButton';
 
 class Preview extends Component {
     constructor(props) {
@@ -10,12 +11,19 @@ class Preview extends Component {
 
     render() {
         return (
-            <div className="card w-50 container">
-                <RenderForm
-                    formData={this.props.formData}
-                    onSubmit={this.props.onSubmit}
-                    title={this.props.title}
-                    description={this.props.description}
+            <div className="container w-50">
+                <div className="card">
+                    <RenderForm
+                        formData={this.props.formData}
+                        onSubmit={this.props.onSubmit}
+                        title={this.props.title}
+                        description={this.props.description}
+                    />
+                </div>
+                <SimpleLinkButton
+                    title="Show builder"
+                    className="btn btn-success float-left"
+                    toLink="/builder"
                 />
             </div>
         );

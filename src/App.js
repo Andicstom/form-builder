@@ -3,6 +3,7 @@ import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home/Home';
 import Builder from './pages/Builder/Builder';
 import Preview from './pages/Preview/Preview';
+import SimpleModal from './components/SimpleModal/SimpleModal';
 import _ from 'lodash';
 import uuid from 'uuid';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -229,11 +230,55 @@ class App extends Component {
         this.setState({ formBlocks });
     };
 
+    resetFormData = () => {
+        let formBlocks = [
+            {
+                id: uuid.v4(),
+                type: 'text',
+                title: 'Questin 1',
+                content: {
+                    props: {},
+                    formBlockOptionItems: []
+                }
+            }
+        ];
+
+        this.setState({ formBlocks });
+    };
+
+    showResetFormModal = modalId => {
+        
+    };
+
+    hideResetFormModal = modalId => {
+        // get modal
+        const modal = document.getElementById(modalId);
+
+        // change state like in hidden modal
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden', 'true');
+        modal.setAttribute('style', 'display: none');
+
+        // get modal backdrop
+        const modalBackdrops = document.getElementsByClassName(
+            'modal-backdrop'
+        );
+
+        // remove opened modal backdrop
+        document.body.removeChild(modalBackdrops[0]);
+    };
+
     render() {
         return (
             <Router>
                 <div>
                     <Navbar />
+                    <SimpleModal
+                        id="resetFormModal"
+                        modalTitle="Are you sure?"
+                        modalText="Reset Form"
+                        positiveBtnText="Reset"
+                    />
                     <br />
                     <Route exact path="/" component={Home} />
                     <Route
@@ -260,7 +305,10 @@ class App extends Component {
                                 description={this.state.description}
                                 onMinNumberChange={this.onMinNumberChange}
                                 onMaxNumberChange={this.onMaxNumberChange}
-                                changeDynamicInputType={this.changeDynamicInputType}
+                                changeDynamicInputType={
+                                    this.changeDynamicInputType
+                                }
+                                resetFormData={this.resetFormData}
                             />
                         )}
                     />
